@@ -1,0 +1,19 @@
+[Unit]
+Description=GTP_SUBCRIPTION
+Wants=network-online.target
+After=syslog.target network.target network-online.target
+
+[Service]
+ExecStart=/opt/glosav/gtp-subscription/bin/gtp-subscription config.json constraint.json
+WorkingDirectory=/opt/glosav/gtp-subscription/bin
+User=root
+# WatchdogSec=5
+StartLimitInterval=0
+StartLimitBurst=0
+Restart=always
+RestartSec=2
+TimeoutStopSec=3
+KillSignal=SIGINT
+
+[Install]
+WantedBy=multi-user.target

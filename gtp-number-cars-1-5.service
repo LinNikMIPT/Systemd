@@ -1,0 +1,24 @@
+[Unit]
+Description=GTP_NUMBER_CARS
+Wants=network-online.target
+#Requires=
+After=syslog.target network.target network-online.target
+
+[Service]
+#Environment="PRESTART_DELAY=0"
+ExecStart=/opt/glosav/gtp-number-cars/bin/gtp-number-cars configurations-1-5.json constraint.json
+ExecReload=kill -s SIGUSR1 $MAINPID
+KillSignal=SIGINT
+TimeoutStopSec=3s
+RestartKillSignal=SIGINT
+SendSIGKILL=Yes
+TimeoutAbortSec=5s
+WorkingDirectory=/opt/glosav/gtp-number-cars/bin
+KillMode=process
+# Type=notify
+# WatchdogSec=5s
+Restart=always
+RestartSec=2s
+
+[Install]
+WantedBy=multi-user.target

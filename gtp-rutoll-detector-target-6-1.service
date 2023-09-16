@@ -1,0 +1,19 @@
+[Unit]
+Description=GTP_RUTOLL_DETECTOR_TARGET
+Wants=network-online.target
+After=syslog.target network.target network-online.target
+
+[Service]
+ExecStart=/opt/glosav/gtp-rutoll-detector-target/bin/gtp-rutoll-detector-target configurations-6-1.json constraint.json
+WorkingDirectory=/opt/glosav/gtp-rutoll-detector-target/bin
+User=root
+# WatchdogSec=5
+StartLimitInterval=0
+StartLimitBurst=0
+Restart=always
+RestartSec=2
+TimeoutStopSec=3
+KillSignal=SIGINT
+
+[Install]
+WantedBy=multi-user.target

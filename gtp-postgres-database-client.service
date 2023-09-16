@@ -1,0 +1,19 @@
+[Unit]
+Description=GTP_POSTGRES_DATABASE_CLIENT
+Wants=network-online.target
+After=syslog.target network.target network-online.target
+
+[Service]
+ExecStart=/opt/glosav/gtp-postgres-database-client/bin/gtp-postgres-database-client configurations-1-1.json constraint.json
+WorkingDirectory=/opt/glosav/gtp-postgres-database-client/bin
+User=root
+# WatchdogSec=5
+StartLimitInterval=0
+StartLimitBurst=0
+Restart=always
+RestartSec=2
+TimeoutStopSec=3
+KillSignal=SIGINT
+
+[Install]
+WantedBy=multi-user.target
